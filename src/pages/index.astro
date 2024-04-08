@@ -1,16 +1,34 @@
 ---
-
+import LayoutES from "../layouts/LayoutES.astro";
+import Card from "../components/Card.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Eclipse</title>
-	</head>
-	<body>
-	</body>
-</html>
+<LayoutES>
+    <main>
+        <Card backgroundPath="/cocktails/mojito-bg.jpg" itemPath="/cocktails/mojito.png"/>
+        <Card backgroundPath="/cocktails/mojito-bg.jpg" itemPath="/cocktails/mojito.png"/>
+        <Card backgroundPath="/cocktails/mojito-bg.jpg" itemPath="/cocktails/mojito.png"/>
+        <Card backgroundPath="/cocktails/mojito-bg.jpg" itemPath="/cocktails/mojito.png"/>
+        <Card backgroundPath="/cocktails/mojito-bg.jpg" itemPath="/cocktails/mojito.png"/>
+        <Card backgroundPath="/cocktails/mojito-bg.jpg" itemPath="/cocktails/mojito.png"/>
+        <Card backgroundPath="/cocktails/mojito-bg.jpg" itemPath="/cocktails/mojito.png"/>
+    </main>
+</LayoutES>
+<style>
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 50px;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        height: 100%;
+    }
 
+    @media screen and (max-width: 768px) {
+        main {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
