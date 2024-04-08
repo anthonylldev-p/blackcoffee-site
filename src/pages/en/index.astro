@@ -1,18 +1,18 @@
 ---
-import LayoutES from "../layouts/es/Layout.astro";
-import Card from "../components/Card.astro";
-import {CocktailsConstantES} from "../constants/es/cocktails.constant";
-import {ICard} from "../model/card";
-const cocktails: ICard[] = CocktailsConstantES;
+import Card from "../../components/Card.astro";
+import LayoutEN from "../../layouts/en/Layout.astro";
+import {ICard} from "../../model/card";
+import {CocktailsConstantEN} from "../../constants/en/cocktails.constant";
+const cocktails: ICard[] = CocktailsConstantEN;
 ---
 
-<LayoutES>
+<LayoutEN>
     <main>
         {cocktails.map((item) => (
                 <Card value={item}/>
         ))}
     </main>
-</LayoutES>
+</LayoutEN>
 <style>
     main {
         display: grid;
