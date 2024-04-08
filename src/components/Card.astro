@@ -1,0 +1,182 @@
+---
+import type {ICard} from "../model/card";
+interface Props {
+    value: ICard
+}
+const {value} = Astro.props;
+---
+
+<article>
+    <section>
+        <a href={`/${value.title.toLowerCase()}`}>
+            <div class="card">
+                <div class="wrapper">
+                    <img src={value.backgroundPath} alt="Mojito bg" class="cover-image"/>
+                </div>
+
+                <img src={value.itemPath} alt="Mojito" class="item"/>
+            </div>
+        </a>
+    </section>
+
+    <section class="info">
+        <h3>{value.title.toUpperCase()}</h3>
+        <ul>
+            {value.ingredients.map((item) => (
+                    <li>{item}</li>
+            ))}
+        </ul>
+    </section>
+</article>
+
+<style>
+
+    article {
+        display: flex;
+        flex-direction: column;
+    }
+
+    article section a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .info ul {
+        display: none;
+    }
+
+    .info h3 {
+        font-family: "EB Garamond", serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        font-style: normal;
+        font-size: 1.5em;
+        margin: 5px 0 0 0;
+        text-align: center;
+    }
+
+    .info ul {
+        list-style: none;
+    }
+
+    .card {
+        width: var(--card-width);
+        height: var(--card-height);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 0 36px;
+        perspective: 2500px;
+        overflow: hidden;
+    }
+
+    .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .wrapper {
+        transition: all 0.5s;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+    }
+
+    .card:hover .wrapper {
+        cursor: pointer;
+        filter: brightness(0.4);
+        transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+        box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+    }
+
+    .wrapper::before,
+    .wrapper::after {
+        content: "";
+        opacity: 0;
+        width: 100%;
+        height: 80px;
+        transition: all 0.5s;
+        position: absolute;
+        left: 0;
+    }
+
+    .wrapper::before {
+        top: 0;
+        height: 100%;
+        background-image: linear-gradient(
+                to top,
+                transparent 46%,
+                rgba(12, 13, 19, 0.5) 68%,
+                rgba(12, 13, 19) 97%
+        );
+    }
+
+    .wrapper::after {
+        bottom: 0;
+        opacity: 1;
+        background-image: linear-gradient(
+                to bottom,
+                transparent 46%,
+                rgba(12, 13, 19, 0.5) 68%,
+                rgba(12, 13, 19) 97%
+        );
+    }
+
+    .card:hover .wrapper::before,
+    .wrapper::after {
+        opacity: 1;
+    }
+
+    .card:hover .wrapper::after {
+        height: 120px;
+    }
+
+    .title {
+        width: 100%;
+        transition: transform 0.5s;
+    }
+
+    .card:hover .title {
+        transform: translate3d(0%, -50px, 100px);
+    }
+
+    .item {
+        height: 65%;
+        opacity: 0;
+        transition: all 0.5s;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .card:hover .item {
+        cursor: pointer;
+        opacity: 1;
+        transform: translate3d(0%, -30%, 100px);
+    }
+
+    @media (min-width: 768px) {
+        article {
+            gap: 15px;
+            flex-direction: row;
+        }
+
+        article section a {
+            display: block;
+        }
+
+        .info ul {
+            display: block;
+        }
+
+        .info h3 {
+            margin: 0 0 0 40px;
+            text-align: start;
+            font-size: 2em;
+        }
+    }
+</style>
